@@ -32,15 +32,19 @@ typedef tColor *tChromosome;
 @property (nonatomic, retain) NSProgressIndicator *progressIndicator;
 @property (assign) NSInteger populationSize;
 @property (assign) NSInteger generations;
-@property (assign) NSInteger bestIndividuals;
+@property (assign) NSInteger bestIndividualsCount;
 @property (assign) NSTextField *bestFitness;
+@property (assign) NSTextField *progressLabel;
 @property (nonatomic, retain) Twister *generator;
 
+- (void)readFile;
 - (void)runEvolution;
 
 // genetic operators
 - (void)crossover1ParentA:(tChromosome *)parentA parentB:(tChromosome *)parentB child:(tChromosome *)child;
 - (void)crossover2ParentA:(tChromosome *)parentA parentB:(tChromosome *)parentB child:(tChromosome *)child;
-- (NSUInteger)fitness:(tChromosome *)chromosome;
+- (NSInteger)fitness:(tChromosome *)chromosome;
+- (void)printChromosome:(tChromosome *)chromosome;
+- (NSString *)chromosomeString:(tChromosome *)chromosome;
 
 @end

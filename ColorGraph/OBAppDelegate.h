@@ -14,6 +14,7 @@
 @property (assign) IBOutlet NSWindow *progressWindow;
 @property (assign) IBOutlet NSProgressIndicator *progress;
 @property (assign) IBOutlet NSTextField *fitnessLabel;
+@property (assign) IBOutlet NSTextField *progressLabel;
 
 @property (readwrite) NSInteger populationSize;
 @property (readwrite) NSInteger generations;

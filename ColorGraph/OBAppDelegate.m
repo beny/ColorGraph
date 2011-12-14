@@ -14,23 +14,26 @@
 @synthesize window = _window;
 @synthesize progressWindow, progress;
 @synthesize populationSize, generations, bestIndividuals;
-@synthesize fitnessLabel;
+@synthesize fitnessLabel, progressLabel;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
 	self.generations = 500;
-	self.populationSize = 100;
-	self.bestIndividuals = 50;
+	self.populationSize = 10;
+	self.bestIndividuals = self.populationSize/2;
 }
 
 - (IBAction)runEvolution:(id)sender {
-//	[NSApp beginSheet:progressWindow modalForWindow:_window modalDelegate:self didEndSelector:nil contextInfo:nil];
+	[NSApp beginSheet:progressWindow modalForWindow:_window modalDelegate:self didEndSelector:nil contextInfo:nil];
+	
+	[self.progress usesThreadedAnimation];
 	
 	OBEvolution *evolution = [[[OBEvolution alloc] init] autorelease];
+	evolution.progressLabel = self.progressLabel;
 	evolution.progressIndicator = self.progress;
 	evolution.generations = self.generations;
 	evolution.populationSize = self.populationSize;
-	evolution.bestIndividuals = self.bestIndividuals;
+	evolution.bestIndividualsCount = self.bestIndividuals;
 	evolution.bestFitness = self.fitnessLabel;
 	[evolution runEvolution];
 }

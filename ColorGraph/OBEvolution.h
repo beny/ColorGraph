@@ -25,15 +25,22 @@ typedef struct {
 typedef NSUInteger tColor;
 typedef tColor *tChromosome;
 
+@class Twister;
 
-@interface OBEvolution : NSObject {	
-}
+@interface OBEvolution : NSObject 
 
 @property (nonatomic, retain) NSProgressIndicator *progressIndicator;
 @property (assign) NSInteger populationSize;
 @property (assign) NSInteger generations;
 @property (assign) NSInteger bestIndividuals;
-
 @property (assign) NSTextField *bestFitness;
+@property (nonatomic, retain) Twister *generator;
+
 - (void)runEvolution;
+
+// genetic operators
+- (void)crossover1ParentA:(tChromosome *)parentA parentB:(tChromosome *)parentB child:(tChromosome *)child;
+- (void)crossover2ParentA:(tChromosome *)parentA parentB:(tChromosome *)parentB child:(tChromosome *)child;
+- (NSUInteger)fitness:(tChromosome *)chromosome;
+
 @end

@@ -11,5 +11,15 @@
 @interface OBAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSWindow *progressWindow;
+@property (assign) IBOutlet NSProgressIndicator *progress;
+@property (assign) IBOutlet NSTextField *fitnessLabel;
+
+@property (readwrite) NSInteger populationSize;
+@property (readwrite) NSInteger generations;
+@property (readwrite) NSInteger bestIndividuals;
+
+- (IBAction)runEvolution:(id)sender;
+- (IBAction)stopEvolution:(id)sender;
 
 @end

@@ -3,11 +3,12 @@
 //  ColorGraph
 //
 //  Created by Ondra Beneš on 12/14/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 FIT VUTBR. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
+// evolution structures
 typedef struct {
 	NSUInteger nodeA;
 	NSUInteger nodeB;
@@ -29,19 +30,24 @@ typedef tColor *tChromosome;
 
 @interface OBEvolution : NSObject 
 
+// gui & views
 @property (nonatomic, retain) NSProgressIndicator *progressIndicator;
-@property (assign) NSInteger populationSize;
-@property (assign) NSInteger generations;
-@property (assign) NSInteger bestIndividualsCount;
-
-@property (assign) NSTextField *bestFitness;
 @property (assign) NSTextField *progressLabel;
 @property (nonatomic, retain) Twister *generator;
 @property (nonatomic, retain) OBAppDelegate *delegate;
 
+// evolution
+@property (assign) NSInteger populationSize;
+@property (assign) NSInteger generations;
+@property (assign) NSInteger bestIndividualsCount;
+@property (assign) NSTextField *bestFitness;
+
+// file
 - (void)readFile;
-- (void)runEvolution;
+
+// evolution
 - (void)testEvolution;
+- (void)runEvolution;
 
 // genetic operators
 - (void)crossover1ParentA:(tChromosome *)parentA parentB:(tChromosome *)parentB child:(tChromosome *)child;

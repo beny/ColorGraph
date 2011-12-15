@@ -3,7 +3,7 @@
 //  ColoringGraph
 //
 //  Created by Ondra Beneš on 11/28/11.
-//  Copyright (c) 2011 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2011 FIT VUTBR. All rights reserved.
 //
 
 #import "Twister.h"

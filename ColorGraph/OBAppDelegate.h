@@ -19,6 +19,11 @@
 @property (readwrite) NSInteger populationSize;
 @property (readwrite) NSInteger generations;
 @property (readwrite) NSInteger bestIndividuals;
+@property (assign) float mutationProperty;
+
+@property (copy) NSString *filename;
+
+- (IBAction)openFile:(id)sender;
 
 - (IBAction)runEvolution:(id)sender;
 - (IBAction)stopEvolution:(id)sender;

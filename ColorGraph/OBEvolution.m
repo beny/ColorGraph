@@ -79,19 +79,7 @@
 			
 			lastAdded++;				
 		}
-	}];
-}
-
-- (void)runEvolution {
-	
-	[self.progressIndicator startAnimation:self];
-	self.progressIndicator.doubleValue = 0.0;
-	
-	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
-		[self readFile];
-		
-#ifdef DEBUG
 //		NSUInteger count;
 //		for (unsigned i = 0; i < nodesCount; i++) {
 //			
@@ -104,6 +92,11 @@
 //			
 //			NSLog(@"Node %d has degree %ld", i, count);
 //		}
+	}];
+}
+
+- (void)testEvolution {
+#ifdef DEBUG
 //		
 //		// alloc
 //		tChromosome *chr1 = (tChromosome*)malloc(sizeof(tColor) * nodesCount);
@@ -138,6 +131,21 @@
 //		free(chrC);
 //		free(chrCC);
 #endif
+}
+
+- (void)runEvolution {
+	
+	[self.progressIndicator startAnimation:self];
+	self.progressIndicator.doubleValue = 0.0;
+	
+//	// if no file is selected
+//	if (self.delegate.filename == nil || self.delegate.filename.length == 0) {
+//		return;
+//	}
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		
+		[self readFile];
 		
 		NSLog(@"Evolution begins");
 		
@@ -161,7 +169,7 @@
 		
 		for (unsigned g = 0; g<self.generations; g++) {
 			
-			NSLog(@"New generation started");
+//			NSLog(@"New generation started");
 			
 			dispatch_async(dispatch_get_main_queue(), ^{
 				// set progress state
@@ -169,7 +177,7 @@
 				[self.progressLabel setStringValue:[NSString stringWithFormat:@"%d%%", (int)ceilf(100 * ((float)g/(float)self.generations))]];
 			});
 			
-			NSLog(@"Population before sort");
+//			NSLog(@"Population before sort");
 			
 //			for (unsigned i = 0; i<populationSize; i++) {
 //				NSLog(@"Chromosome %@ and fitness %ld", [self chromosomeString:population[i]], [self fitness:population[i]]);
@@ -189,6 +197,8 @@
 				}
 			}
 			
+//			NSLog(@"Sorted population");
+//			
 //			for (unsigned i = 0; i<populationSize; i++) {
 //				NSLog(@"Chromosome %@ and fitness %ld", [self chromosomeString:population[i]], [self fitness:population[i]]);
 //			}
@@ -201,7 +211,7 @@
 				[self.bestFitness setStringValue:[NSString stringWithFormat:@"%ld", [self numberOfColorsInChromosome:bestOne]]];
 			});
 			
-			NSLog(@"Creating new generation");
+//			NSLog(@"Creating new generation");
 			
 			// create a new population with crossover
 			for (unsigned i = 0; i<populationSize; i++) {
@@ -213,11 +223,14 @@
 				
 				newPopulation[i] = chr;
 				
-				// try to mutate
-				[self mutate:chr withProbability:0.1];
+				// try to mutate by switching
+				[self mutateGene:chr withProbability:self.delegate.mutationProperty];
+				
+				// mutate with random gene
+				[self mutateSwitch:chr withProbability:0.1];
 			}
 			
-			NSLog(@"Saving new generatiron");
+//			NSLog(@"Saving new generatiron");
 			for (unsigned i = 0; i<populationSize; i++) {
 				population[i] = newPopulation[i];
 			}
@@ -267,11 +280,14 @@
 //	NSLog(@"\tchrCC = %@", repCC);
 }
 
-- (void)mutate:(tChromosome *)chromosome withProbability:(float)probability {
+- (void)mutateSwitch:(tChromosome *)chromosome withProbability:(float)probability {
 	
 	float rand = [generator randomDoubleValueBetweenStart:0 andStop:1];
 
 	if (rand < probability) {
+		
+//		NSLog(@"Mutation switch appear");
+		
 		NSUInteger randPositionA = [generator randomIntValueBetweenStart:0 andStop:nodesCount-1];
 		NSUInteger randPositionB = [generator randomIntValueBetweenStart:0 andStop:nodesCount-1];
 		
@@ -280,6 +296,20 @@
 		temp = chromosome[randPositionA];
 		chromosome[randPositionA] = chromosome[randPositionB];
 		chromosome[randPositionB] = temp;
+	}
+}
+
+- (void)mutateGene:(tChromosome *)chromosome withProbability:(float)probability {
+	
+	float rand = [generator randomDoubleValueBetweenStart:0 andStop:1];
+	
+	if (rand < probability) {
+		
+//		NSLog(@"Mutation gene appear");
+		
+		NSUInteger randPosition = [generator randomIntValueBetweenStart:0 andStop:nodesCount-1];
+		tColor color = [generator randomIntValueBetweenStart:0 andStop:nodesCount-1];
+		chromosome[randPosition] = color;
 	}
 }
 

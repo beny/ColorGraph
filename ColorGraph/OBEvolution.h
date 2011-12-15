@@ -33,6 +33,7 @@ typedef tColor *tChromosome;
 @property (assign) NSInteger populationSize;
 @property (assign) NSInteger generations;
 @property (assign) NSInteger bestIndividualsCount;
+
 @property (assign) NSTextField *bestFitness;
 @property (assign) NSTextField *progressLabel;
 @property (nonatomic, retain) Twister *generator;
@@ -40,11 +41,13 @@ typedef tColor *tChromosome;
 
 - (void)readFile;
 - (void)runEvolution;
+- (void)testEvolution;
 
 // genetic operators
 - (void)crossover1ParentA:(tChromosome *)parentA parentB:(tChromosome *)parentB child:(tChromosome *)child;
 - (void)crossover2ParentA:(tChromosome *)parentA parentB:(tChromosome *)parentB child:(tChromosome *)child;
-- (void)mutate:(tChromosome *)chromosome withProbability:(float)probability;
+- (void)mutateSwitch:(tChromosome *)chromosome withProbability:(float)probability;
+- (void)mutateGene:(tChromosome *)chromosome withProbability:(float)probability;
 
 // chromosome help methods
 - (NSUInteger)numberOfColorsInChromosome:(tChromosome *)chromosome;

@@ -15,16 +15,23 @@
 @synthesize progressWindow, progress, resultWindow;
 @synthesize populationSize, generations, bestIndividuals;
 @synthesize fitnessLabel, progressLabel, fitnessResult;
+@synthesize filename, mutationProperty;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
 	self.generations = 500;
 	self.populationSize = 10;
 	self.bestIndividuals = self.populationSize/2;
+	self.mutationProperty = 0.1f;
 
 }
 
 - (IBAction)runEvolution:(id)sender {
+	
+//	if (self.filename == nil || self.filename.length == 0) {
+//		[self performSelector:@selector(openFile:)];
+//	}
+	
 	[NSApp beginSheet:progressWindow modalForWindow:_window modalDelegate:self didEndSelector:nil contextInfo:nil];
 	
 	OBEvolution *evolution = [[[OBEvolution alloc] init] autorelease];
@@ -40,6 +47,15 @@
 
 - (void)awakeFromNib {
 	[self.progress usesThreadedAnimation];
+}
+
+- (void)openFile:(id)sender {
+	NSOpenPanel *op = [NSOpenPanel openPanel];
+    if ([op runModal] == NSOKButton) {
+		NSURL *fileUrl = [op URL];
+		self.filename = [fileUrl absoluteString];
+		NSLog(@"Opening file %@", self.filename);
+	}
 }
 
 - (void)showResultForFitness:(NSUInteger)fitness {

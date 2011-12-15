@@ -10,11 +10,11 @@
 
 @interface OBAppDelegate : NSObject <NSApplicationDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
-@property (assign) IBOutlet NSWindow *progressWindow;
+@property (assign) IBOutlet NSWindow *window, *progressWindow, *resultWindow;
 @property (assign) IBOutlet NSProgressIndicator *progress;
 @property (assign) IBOutlet NSTextField *fitnessLabel;
 @property (assign) IBOutlet NSTextField *progressLabel;
+@property (assign) IBOutlet NSTextField *fitnessResult;
 
 @property (readwrite) NSInteger populationSize;
 @property (readwrite) NSInteger generations;
@@ -22,5 +22,7 @@
 
 - (IBAction)runEvolution:(id)sender;
 - (IBAction)stopEvolution:(id)sender;
+- (IBAction)dismissResults:(id)sender;
+- (void) showResultForFitness:(NSUInteger)fitness;
 
 @end

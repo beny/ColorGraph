@@ -25,7 +25,7 @@ typedef struct {
 typedef NSUInteger tColor;
 typedef tColor *tChromosome;
 
-@class Twister;
+@class Twister, OBAppDelegate;
 
 @interface OBEvolution : NSObject 
 
@@ -36,6 +36,7 @@ typedef tColor *tChromosome;
 @property (assign) NSTextField *bestFitness;
 @property (assign) NSTextField *progressLabel;
 @property (nonatomic, retain) Twister *generator;
+@property (nonatomic, retain) OBAppDelegate *delegate;
 
 - (void)readFile;
 - (void)runEvolution;
@@ -43,6 +44,10 @@ typedef tColor *tChromosome;
 // genetic operators
 - (void)crossover1ParentA:(tChromosome *)parentA parentB:(tChromosome *)parentB child:(tChromosome *)child;
 - (void)crossover2ParentA:(tChromosome *)parentA parentB:(tChromosome *)parentB child:(tChromosome *)child;
+- (void)mutate:(tChromosome *)chromosome withProbability:(float)probability;
+
+// chromosome help methods
+- (NSUInteger)numberOfColorsInChromosome:(tChromosome *)chromosome;
 - (NSInteger)fitness:(tChromosome *)chromosome;
 - (void)printChromosome:(tChromosome *)chromosome;
 - (NSString *)chromosomeString:(tChromosome *)chromosome;

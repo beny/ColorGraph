@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		B94587881498B25600135E0B /* OBEvolution.m in Sources */ = {isa = PBXBuildFile; fileRef = B94587871498B25600135E0B /* OBEvolution.m */; };
 		B94587971498B86100135E0B /* Twister.m in Sources */ = {isa = PBXBuildFile; fileRef = B94587921498B86000135E0B /* Twister.m */; };
-		B945879C1498D5B800135E0B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = B945879B1498D5B800135E0B /* Icon.png */; };
+		B94587AB14993D2D00135E0B /* sfc.icns in Resources */ = {isa = PBXBuildFile; fileRef = B94587AA14993D2D00135E0B /* sfc.icns */; };
 		B9B263291497984D002227B7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B263281497984D002227B7 /* Cocoa.framework */; };
 		B9B263331497984D002227B7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B9B263311497984D002227B7 /* InfoPlist.strings */; };
 		B9B263351497984D002227B7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B9B263341497984D002227B7 /* main.m */; };
@@ -23,7 +23,7 @@
 		B94587871498B25600135E0B /* OBEvolution.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBEvolution.m; sourceTree = "<group>"; };
 		B94587911498B86000135E0B /* Twister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Twister.h; sourceTree = "<group>"; };
 		B94587921498B86000135E0B /* Twister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Twister.m; sourceTree = "<group>"; };
-		B945879B1498D5B800135E0B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		B94587AA14993D2D00135E0B /* sfc.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = sfc.icns; sourceTree = "<group>"; };
 		B9B263241497984D002227B7 /* ColorGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9B263281497984D002227B7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		B9B2632B1497984D002227B7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -54,7 +54,7 @@
 		B9B263191497984D002227B7 = {
 			isa = PBXGroup;
 			children = (
-				B945879B1498D5B800135E0B /* Icon.png */,
+				B94587AA14993D2D00135E0B /* sfc.icns */,
 				B9B2632E1497984D002227B7 /* ColorGraph */,
 				B9B263271497984D002227B7 /* Frameworks */,
 				B9B263251497984D002227B7 /* Products */,
@@ -168,7 +168,7 @@
 				B9B263331497984D002227B7 /* InfoPlist.strings in Resources */,
 				B9B263391497984D002227B7 /* Credits.rtf in Resources */,
 				B9B2633F1497984D002227B7 /* MainMenu.xib in Resources */,
-				B945879C1498D5B800135E0B /* Icon.png in Resources */,
+				B94587AB14993D2D00135E0B /* sfc.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,9 +8,11 @@
 
 #import "OBEvolution.h"
 
+#import "OBAppDelegate.h"
 #import "Twister.h"
 
-#define FILE @"DSJC5.5.col"
+//#define FILE @"DSJC5.5.col"
+#define FILE @"DSJC125.5.col"
 
 @implementation OBEvolution {
 @private
@@ -22,6 +24,7 @@
 @synthesize progressIndicator;
 @synthesize populationSize, generations, bestIndividualsCount;
 @synthesize bestFitness, generator, progressLabel;
+@synthesize delegate;
 
 - (id)init {
 	if (self = [super init]) {
@@ -82,6 +85,7 @@
 - (void)runEvolution {
 	
 	[self.progressIndicator startAnimation:self];
+	self.progressIndicator.doubleValue = 0.0;
 	
 	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 		
@@ -194,7 +198,7 @@
 			
 			dispatch_async(dispatch_get_main_queue(), ^{
 				// set progress state
-				[self.bestFitness setStringValue:[NSString stringWithFormat:@"%ld", [self fitness:bestOne]]];
+				[self.bestFitness setStringValue:[NSString stringWithFormat:@"%ld", [self numberOfColorsInChromosome:bestOne]]];
 			});
 			
 			NSLog(@"Creating new generation");
@@ -208,20 +212,26 @@
 				[self crossover1ParentA:population[rand1] parentB:population[rand2] child:chr];
 				
 				newPopulation[i] = chr;
+				
+				// try to mutate
+				[self mutate:chr withProbability:0.1];
 			}
 			
 			NSLog(@"Saving new generatiron");
-//			free(population);
+			for (unsigned i = 0; i<populationSize; i++) {
+				population[i] = newPopulation[i];
+			}
+			
+//			free(newPopulation);
 			
 		}
 		free(newPopulation);
 		
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[self.progressIndicator stopAnimation:self];
+			[self.delegate showResultForFitness:[self numberOfColorsInChromosome:population[0]]];
 		});
 		
-		free(graph.nodes);
-		free(graph.edges);
 	});
 }
 
@@ -257,6 +267,23 @@
 //	NSLog(@"\tchrCC = %@", repCC);
 }
 
+- (void)mutate:(tChromosome *)chromosome withProbability:(float)probability {
+	
+	float rand = [generator randomDoubleValueBetweenStart:0 andStop:1];
+
+	if (rand < probability) {
+		NSUInteger randPositionA = [generator randomIntValueBetweenStart:0 andStop:nodesCount-1];
+		NSUInteger randPositionB = [generator randomIntValueBetweenStart:0 andStop:nodesCount-1];
+		
+		// switch two genes
+		tColor *temp;
+		temp = chromosome[randPositionA];
+		chromosome[randPositionA] = chromosome[randPositionB];
+		chromosome[randPositionB] = temp;
+	}
+}
+
+#pragma mark - Chromosome Help Methods
 - (NSInteger)fitness:(tChromosome *)chromosome {
 
 	tColor color;
@@ -274,7 +301,18 @@
 			}
 		}
 	}
+
 	
+	fitness -= [self numberOfColorsInChromosome:chromosome];
+	
+//	NSLog(@"== Fitness ==");
+//	NSLog(@"\tChromosome has %ld colors", uniqColorCount);
+//	NSLog(@"\tChromosome fitness = %d", fitness);
+	
+	return fitness;
+}
+
+- (NSUInteger)numberOfColorsInChromosome:(tChromosome *)chromosome {
 	// uniq color
 	NSUInteger uniqColorCount = 0;
 	BOOL *uniqColors = (BOOL *)malloc(sizeof(BOOL) * nodesCount);
@@ -285,14 +323,7 @@
 		//			NSLog(@"uniqColors[%d] = %d", k, uniqColors[k]);
 	}
 	free(uniqColors);
-	
-	fitness -= uniqColorCount;
-	
-//	NSLog(@"== Fitness ==");
-//	NSLog(@"\tChromosome has %ld colors", uniqColorCount);
-//	NSLog(@"\tChromosome fitness = %d", fitness);
-	
-	return fitness;
+	return uniqColorCount;
 }
 
 - (void)printChromosome:(tChromosome *)chromosome {
@@ -310,6 +341,7 @@
 #pragma mark - Memory Management
 - (void)dealloc {
 	
+	[delegate release];
 	[generator release];
 	[progressIndicator release];
 	[super dealloc];

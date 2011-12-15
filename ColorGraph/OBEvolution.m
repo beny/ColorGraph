@@ -12,7 +12,10 @@
 #import "Twister.h"
 
 //#define FILE @"DSJC5.5.col"
-#define FILE @"DSJC125.5.col"
+//#define FILE @"DSJC125.5.col"
+#define FILE @"DSJC250.5.col"
+//#define FILE @"DSJC500.1.col"
+//#define FILE @"DSJC500.5.col"
 
 @implementation OBEvolution {
 @private
@@ -210,6 +213,8 @@
 				// set progress state
 				[self.bestFitness setStringValue:[NSString stringWithFormat:@"%ld", [self numberOfColorsInChromosome:bestOne]]];
 			});
+			
+			NSLog(@"%d,%ld", g, [self numberOfColorsInChromosome:population[0]]);
 			
 //			NSLog(@"Creating new generation");
 			

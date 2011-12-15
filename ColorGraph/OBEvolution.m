@@ -155,7 +155,7 @@
 		[self readFile];
 		
 #ifdef DEBUG
-		NSLog(@"Evolution begins");
+//		NSLog(@"Evolution begins");
 #endif
 		
 		// generate init population
@@ -179,7 +179,7 @@
 		for (unsigned g = 0; g<self.generations; g++) {
 			
 #ifdef DEBUG
-			NSLog(@"New generation started");
+//			NSLog(@"New generation started");
 #endif
 			
 			dispatch_async(dispatch_get_main_queue(), ^{
@@ -189,7 +189,7 @@
 			});
 			
 #ifdef TEST
-			NSLog(@"Population before sort");
+//			NSLog(@"Population before sort");
 
 			for (unsigned i = 0; i<populationSize; i++) {
 				NSLog(@"Chromosome %@ and fitness %ld", [self chromosomeString:population[i]], [self fitness:population[i]]);
@@ -227,8 +227,8 @@
 			});
 			
 #ifdef DEBUG
-			NSLog(@"%d,%ld", g, [self numberOfColorsInChromosome:population[0]]);
-			NSLog(@"Creating new generation");
+//			NSLog(@"%d,%ld", g, [self numberOfColorsInChromosome:population[0]]);
+//			NSLog(@"Creating new generation");
 #endif
 			
 			// create a new population with crossover
@@ -249,7 +249,7 @@
 			}
 			
 #ifdef DEBUG
-			NSLog(@"Saving new generatiron");
+//			NSLog(@"Saving new generatiron");
 #endif
 			for (unsigned i = 0; i<populationSize; i++) {
 				population[i] = newPopulation[i];

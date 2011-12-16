@@ -227,7 +227,7 @@
 			});
 			
 #ifdef DEBUG
-//			NSLog(@"%d,%ld", g, [self numberOfColorsInChromosome:population[0]]);
+			NSLog(@"%ld", [self numberOfColorsInChromosome:population[0]]);
 //			NSLog(@"Creating new generation");
 #endif
 			
@@ -245,7 +245,7 @@
 				[self mutateGene:chr withProbability:self.delegate.mutationProperty];
 				
 				// mutate with random gene
-				[self mutateSwitch:chr withProbability:0.1];
+				[self mutateSwitch:chr withProbability:self.delegate.mutationSwitch];
 			}
 			
 #ifdef DEBUG
@@ -260,12 +260,11 @@
 		dispatch_async(dispatch_get_main_queue(), ^{
 			[self.progressIndicator stopAnimation:self];
 			[self.delegate showResultForFitness:[self numberOfColorsInChromosome:population[0]]];
-		});
-		
-		// free memory
-		free(newPopulation);
-		free(population);
-		
+			
+			// free memory
+			free(newPopulation);
+			free(population);
+		});		
 	});
 }
 
@@ -382,7 +381,7 @@
 	for (unsigned k = 0; k<nodesCount; k++)	uniqColors[(int)chromosome[k]] = YES;
 	for (unsigned k = 0; k<nodesCount; k++) { 
 		if(uniqColors[k]) uniqColorCount++;
-		//			NSLog(@"uniqColors[%d] = %d", k, uniqColors[k]);
+//			NSLog(@"uniqColors[%d] = %d", k, uniqColors[k]);
 	}
 	free(uniqColors);
 	return uniqColorCount;

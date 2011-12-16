@@ -22,6 +22,7 @@
 @property (readwrite) NSInteger generations;
 @property (readwrite) NSInteger bestIndividuals;
 @property (assign) float mutationProperty;
+@property (assign) float mutationSwitch;
 
 // file
 @property (copy) NSString *filename;

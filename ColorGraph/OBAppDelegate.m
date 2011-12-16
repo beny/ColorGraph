@@ -15,15 +15,16 @@
 @synthesize progressWindow, progress, resultWindow;
 @synthesize populationSize, generations, bestIndividuals;
 @synthesize fitnessLabel, progressLabel, fitnessResult;
-@synthesize filename, mutationProperty;
+@synthesize filename, mutationProperty, mutationSwitch;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 
 	// basic evolution settings (fill in GUI)
 	self.generations = 500;
 	self.populationSize = 100;
-	self.bestIndividuals = self.populationSize/2;
+	self.bestIndividuals = self.populationSize/4;
 	self.mutationProperty = 0.1f;
+	self.mutationSwitch = 0.1f;
 
 }
 

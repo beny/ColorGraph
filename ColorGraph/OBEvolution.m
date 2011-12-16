@@ -251,7 +251,8 @@
 #ifdef DEBUG
 //			NSLog(@"Saving new generatiron");
 #endif
-			for (unsigned i = 0; i<populationSize; i++) {
+			// check for elisim
+			for (unsigned i = self.delegate.elistism; i<populationSize; i++) {
 				population[i] = newPopulation[i];
 			}			
 		}

@@ -13,7 +13,7 @@
 
 @synthesize window = _window;
 @synthesize progressWindow, progress, resultWindow;
-@synthesize populationSize, generations, bestIndividuals;
+@synthesize populationSize, generations, bestIndividuals, elistism;
 @synthesize fitnessLabel, progressLabel, fitnessResult;
 @synthesize filename, mutationProperty, mutationSwitch;
 
@@ -25,6 +25,7 @@
 	self.bestIndividuals = self.populationSize/4;
 	self.mutationProperty = 0.1f;
 	self.mutationSwitch = 0.1f;
+	self.elistism = 0;
 
 }
 

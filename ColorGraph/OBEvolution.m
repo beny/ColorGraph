@@ -237,7 +237,8 @@
 				unsigned rand2 = [generator randomIntValueBetweenStart:0 andStop:(int)self.bestIndividualsCount-1];
 				
 				tChromosome *chr = (tChromosome*)malloc(sizeof(tColor) * nodesCount);
-				[self crossover1ParentA:population[rand1] parentB:population[rand2] child:chr];
+//				[self crossover1ParentA:population[rand1] parentB:population[rand2] child:chr];
+				[self crossover2ParentA:population[rand1] parentB:population[rand2] child:chr];
 				
 				newPopulation[i] = chr;
 				
@@ -252,7 +253,7 @@
 //			NSLog(@"Saving new generatiron");
 #endif
 			// check for elisim
-			for (unsigned i = self.delegate.elistism; i<populationSize; i++) {
+			for (NSInteger i = self.delegate.elistism; i<populationSize; i++) {
 				population[i] = newPopulation[i];
 			}			
 		}
